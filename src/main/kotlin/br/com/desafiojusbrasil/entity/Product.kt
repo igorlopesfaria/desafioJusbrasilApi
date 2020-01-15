@@ -10,5 +10,5 @@ class Product(
         val price: String,
         val description: String,
         @OneToMany(mappedBy = "product")
-        val productOrders: List<ProductOder>?= null
+        val productOrders: List<ProductOrder>?= null
 )

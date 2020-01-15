@@ -13,7 +13,7 @@ class ProductOrderKey(
 
 @Entity
 @Table(name = "product_order")
-class ProductOder(
+class ProductOrder(
         @EmbeddedId
         val id: ProductOrderKey,
         @ManyToOne

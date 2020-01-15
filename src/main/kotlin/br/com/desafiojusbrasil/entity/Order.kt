@@ -1,6 +1,5 @@
 package br.com.desafiojusbrasil.entity
 
-import br.com.desafiojusbrasil.model.OrderItem
 import javax.persistence.*
 
 @Entity
@@ -12,5 +11,5 @@ class Order(
         @Column(name = "date_ordered")
         val dateOrdered: String,
         @OneToMany(mappedBy = "orders")
-        val productOrders: List<ProductOder>
+        val productOrders: List<ProductOrder>
 )
