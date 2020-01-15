@@ -12,8 +12,8 @@ class ProductOrderKey(
 ): Serializable
 
 @Entity
-@NamedQuery(name = "ProductOrder.findByOrderId", query = "SELECT po FROM product_order po WHERE order_id = (?1)")
-@Table(name = "product_order")
+@NamedQuery(name = "ProductOrder.findByOrderId", query = "SELECT po FROM ProductOrder po WHERE order_id = (?1)")
+@Table(name = "ProductOrder")
 class ProductOrder(
         @EmbeddedId
         val id: ProductOrderKey,
@@ -24,6 +24,6 @@ class ProductOrder(
         @ManyToOne
         @MapsId("order_id")
         @JoinColumn(name = "order_id")
-        val order: Order,
+        val orders: Orders,
         val quantity: Int
 )

@@ -3,9 +3,9 @@ package br.com.desafiojusbrasil.entity
 import javax.persistence.*
 
 @Entity
-@NamedQuery(name = "Order.findOpened", query = "SELECT o FROM orders o WHERE o.date_ordered IS NULL LIMIT 1")
-@Table(name = "orders")
-class Order(
+@NamedQuery(name = "Orders.findOpened", query = "SELECT o FROM Orders o WHERE dateOrdered IS NULL")
+@Table(name = "Orders")
+class Orders(
         @Id @GeneratedValue var id: Long,
         @Column(name = "date_created")
         val dateCreated: String,

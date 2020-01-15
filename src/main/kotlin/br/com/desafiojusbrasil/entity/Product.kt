@@ -3,7 +3,7 @@ package br.com.desafiojusbrasil.entity
 import javax.persistence.*
 
 @Entity
-@Table(name = "product")
+@Table(name = "Product")
 class Product(
         @Id @GeneratedValue val id: Long?= null,
         val name: String,
