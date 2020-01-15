@@ -12,6 +12,7 @@ class ProductOrderKey(
 ): Serializable
 
 @Entity
+@NamedQuery(name = "ProductOrder.findByOrderId", query = "SELECT po FROM product_order po WHERE order_id = (?1)")
 @Table(name = "product_order")
 class ProductOrder(
         @EmbeddedId
