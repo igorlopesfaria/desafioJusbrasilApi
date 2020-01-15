@@ -11,6 +11,6 @@ class Order(
         val dateCreated: String,
         @Column(name = "date_ordered")
         val dateOrdered: String,
-        @OneToMany(mappedBy = "product")
+        @OneToMany(mappedBy = "orders")
         val productOrders: List<ProductOder>
 )
