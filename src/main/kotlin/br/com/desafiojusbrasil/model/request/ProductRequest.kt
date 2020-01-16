@@ -1,10 +1,10 @@
 package br.com.desafiojusbrasil.model.request
 
-import br.com.desafiojusbrasil.entity.Product
+import br.com.desafiojusbrasil.dao.Product
 
-class ProductInsert(val name: String,
-                    val price: String,
-                    val description: String) {
+class ProductRequest(val name: String,
+                     val price: String,
+                     val description: String) {
     fun toProduct(): Product = Product(
             name = name,
             price = price,

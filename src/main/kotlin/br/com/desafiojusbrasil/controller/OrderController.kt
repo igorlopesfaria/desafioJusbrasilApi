@@ -1,7 +1,7 @@
 package br.com.desafiojusbrasil.controller
 
-import br.com.desafiojusbrasil.entity.Orders
-import br.com.desafiojusbrasil.model.response.OrderListItem
+import br.com.desafiojusbrasil.dao.Orders
+import br.com.desafiojusbrasil.model.response.OrderItemResponse
 import br.com.desafiojusbrasil.repository.OrderRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -20,8 +20,7 @@ class OrderController(val orderRepository: OrderRepository) {
             }.orElse(ResponseEntity.notFound().build())
 
     @GetMapping
-    fun getAllProducts(): List<OrderListItem> = orderRepository.findAll().map(::OrderListItem)
-
+    fun getAllProducts(): List<OrderItemResponse> = orderRepository.findAll().map(::OrderItemResponse)
 
     @PostMapping
     fun createOrder() {

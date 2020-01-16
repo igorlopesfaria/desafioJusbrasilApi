@@ -1,9 +1,9 @@
 package br.com.desafiojusbrasil.model.response
 
-import br.com.desafiojusbrasil.entity.ProductOrder
+import br.com.desafiojusbrasil.dao.ProductOrder
 
 
-class ProductOrderItem(
+class ProductOrderItemResponse(
                   private val idProduct: Long,
                   private val idOrder: Long,
                   private val productName: String,

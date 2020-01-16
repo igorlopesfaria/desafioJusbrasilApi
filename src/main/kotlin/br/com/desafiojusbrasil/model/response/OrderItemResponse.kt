@@ -1,10 +1,10 @@
 package br.com.desafiojusbrasil.model.response;
 
-import br.com.desafiojusbrasil.entity.Orders
+import br.com.desafiojusbrasil.dao.Orders
 
-class OrderOpened(val id: Long? = 0,
-                  val dataCreated: String,
-                  val dateOrdered: String?=null) {
+class OrderItemResponse(val id: Long? = 0,
+                        val dataCreated: String,
+                        val dateOrdered: String?=null) {
         constructor(database: Orders) : this(
                 id = database.id,
                 dataCreated = database.dateCreated,

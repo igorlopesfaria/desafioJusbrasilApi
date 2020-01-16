@@ -1,7 +1,7 @@
 package br.com.desafiojusbrasil.controller
 
-import br.com.desafiojusbrasil.model.request.ProductInsert
-import br.com.desafiojusbrasil.model.response.ProductListItem
+import br.com.desafiojusbrasil.model.request.ProductRequest
+import br.com.desafiojusbrasil.model.response.ProductItemResponse
 import br.com.desafiojusbrasil.repository.ProductRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,13 +13,13 @@ import javax.validation.Valid
 class ProductController(val productRepository: ProductRepository){
 
     @GetMapping
-    fun getAllProducts(): List<ProductListItem>{
-        return productRepository.findAll().map(::ProductListItem)
+    fun getAllProducts(): List<ProductItemResponse>{
+        return productRepository.findAll().map(::ProductItemResponse)
     }
 
     @PostMapping
-    fun createProduct(@Valid @RequestBody productInsert: ProductInsert) =
-            productRepository.save(productInsert.toProduct())
+    fun createProduct(@Valid @RequestBody productRequest: ProductRequest) =
+            productRepository.save(productRequest.toProduct())
 
     @DeleteMapping("/{id}")
     fun deleteProductById(@PathVariable(value = "id") productId: Long): ResponseEntity<Void> =

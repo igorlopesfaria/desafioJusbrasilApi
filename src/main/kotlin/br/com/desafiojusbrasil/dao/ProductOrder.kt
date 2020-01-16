@@ -1,4 +1,4 @@
-package br.com.desafiojusbrasil.entity
+package br.com.desafiojusbrasil.dao
 
 import java.io.Serializable
 import javax.persistence.*
@@ -25,5 +25,5 @@ class ProductOrder(
         @MapsId("order_id")
         @JoinColumn(name = "order_id")
         val orders: Orders,
-        val quantity: Int
+        var quantity: Int = 0
 )

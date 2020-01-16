@@ -1,4 +1,4 @@
-package br.com.desafiojusbrasil.entity
+package br.com.desafiojusbrasil.dao
 
 import javax.persistence.*
 

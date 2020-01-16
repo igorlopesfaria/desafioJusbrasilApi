@@ -1,6 +1,6 @@
 package br.com.desafiojusbrasil.repository
 
-import br.com.desafiojusbrasil.entity.Orders
+import br.com.desafiojusbrasil.dao.Orders
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.*
