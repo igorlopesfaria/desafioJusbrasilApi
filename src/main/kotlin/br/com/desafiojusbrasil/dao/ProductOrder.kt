@@ -25,5 +25,5 @@ class ProductOrder(
         @MapsId("order_id")
         @JoinColumn(name = "order_id")
         val orders: Orders,
-        var quantity: Int = 0
+        var quantity: Int = 1
 )
