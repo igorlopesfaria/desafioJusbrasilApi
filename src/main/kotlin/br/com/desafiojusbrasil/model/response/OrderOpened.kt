@@ -1,4 +1,4 @@
-package br.com.desafiojusbrasil.model;
+package br.com.desafiojusbrasil.model.response;
 
 import br.com.desafiojusbrasil.entity.Orders
 

@@ -1,6 +1,6 @@
 package br.com.desafiojusbrasil.controller
 
-import br.com.desafiojusbrasil.model.ProductOrderItem
+import br.com.desafiojusbrasil.model.response.ProductOrderItem
 import br.com.desafiojusbrasil.repository.ProductOrderRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

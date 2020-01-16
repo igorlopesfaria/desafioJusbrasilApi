@@ -1,9 +1,8 @@
 package br.com.desafiojusbrasil.controller
 
-import br.com.desafiojusbrasil.model.ProductInsert
+import br.com.desafiojusbrasil.model.request.ProductInsert
+import br.com.desafiojusbrasil.model.response.ProductListItem
 import br.com.desafiojusbrasil.repository.ProductRepository
-import br.com.desafiojusbrasil.model.ProductItem
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -14,8 +13,8 @@ import javax.validation.Valid
 class ProductController(val productRepository: ProductRepository){
 
     @GetMapping
-    fun getAllProducts(): List<ProductItem>{
-        return productRepository.findAll().map(::ProductItem)
+    fun getAllProducts(): List<ProductListItem>{
+        return productRepository.findAll().map(::ProductListItem)
     }
 
     @PostMapping
