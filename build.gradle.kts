@@ -37,6 +37,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation ("org.hibernate:hibernate-core:5.4.2.Final")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("mysql:mysql-connector-java")
