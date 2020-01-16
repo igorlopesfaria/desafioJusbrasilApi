@@ -38,6 +38,14 @@ class OrderController(val orderRepository: OrderRepository) {
                 ResponseEntity<Void>(HttpStatus.OK)
             }.orElse(ResponseEntity.notFound().build())
 
+    @DeleteMapping("/{id}")
+    fun deleteProductById(@PathVariable(value = "id") orderId: Long): ResponseEntity<Void> =
+            orderRepository.findById(orderId).map { product ->
+                orderRepository.delete(product)
+                ResponseEntity<Void>(HttpStatus.OK)
+            }.orElse(ResponseEntity.notFound().build())
+
+
     private fun getNowDateFormat(): String = SimpleDateFormat("dd/M/yyyy hh:mm:ss").format(Date())
 
 }

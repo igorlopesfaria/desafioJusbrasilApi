@@ -22,8 +22,8 @@ class ProductController(val productRepository: ProductRepository){
             productRepository.save(productInsert.toProduct())
 
     @DeleteMapping("/{id}")
-    fun deleteProductById(@PathVariable(value = "id") categoriaId: Long): ResponseEntity<Void> =
-            productRepository.findById(categoriaId).map { product ->
+    fun deleteProductById(@PathVariable(value = "id") productId: Long): ResponseEntity<Void> =
+            productRepository.findById(productId).map { product ->
                 productRepository.delete(product)
                 ResponseEntity<Void>(HttpStatus.OK)
             }.orElse(ResponseEntity.notFound().build())
