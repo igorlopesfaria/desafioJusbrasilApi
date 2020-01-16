@@ -10,12 +10,18 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/products")
-class ProductController(val productRepository: ProductRepository){
+class ProductController(val productRepository: ProductRepository) {
 
     @GetMapping
-    fun getAllProducts(): List<ProductItemResponse>{
+    fun getAllProducts(): List<ProductItemResponse> {
         return productRepository.findAll().map(::ProductItemResponse)
     }
+
+    @GetMapping("/{id}")
+    fun getProductById(@PathVariable(value = "id") productId: Long): ResponseEntity<ProductItemResponse> =
+            productRepository.findById(productId).map { product ->
+                ResponseEntity(ProductItemResponse(product), HttpStatus.OK)
+            }.orElse(ResponseEntity.notFound().build())
 
     @PostMapping
     fun createProduct(@Valid @RequestBody productRequest: ProductRequest) =

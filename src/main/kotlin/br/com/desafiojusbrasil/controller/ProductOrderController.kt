@@ -31,6 +31,11 @@ class ProductOrderController(val productOrderRepository: ProductOrderRepository,
         val productOrderKey = productOrderRequest.toProductOrderKey()
 
         val productOrderOptional = productOrderRepository.findById(productOrderKey)
+        val orderOptional = orderRepository.findById(productOrderKey.orderId)
+
+        if(orderOptional.isPresent && !orderOptional.get().dateOrdered.isNullOrEmpty()){
+            return ResponseEntity.badRequest().build()
+        }
 
         if (productOrderOptional.isPresent) {
             val productOrder = productOrderOptional.get()
@@ -38,8 +43,8 @@ class ProductOrderController(val productOrderRepository: ProductOrderRepository,
             productOrderRepository.save(productOrder)
             return ResponseEntity(HttpStatus.OK)
         } else {
+
             val productOptional = productRepository.findById(productOrderKey.productId)
-            val orderOptional = orderRepository.findById(productOrderKey.orderId)
 
             if (productOptional.isPresent && orderOptional.isPresent) {
                 productOrderRepository.save(ProductOrder(
@@ -57,9 +62,9 @@ class ProductOrderController(val productOrderRepository: ProductOrderRepository,
 
     @DeleteMapping("/order/{order_id}/product/{product_id}")
     fun deleteProductOrderById(@PathVariable(value = "order_id") orderId: Long,
-                          @PathVariable(value = "product_id") productId: Long): ResponseEntity<Void>  =
-                productOrderRepository.findById(ProductOrderKey(productId, orderId)).map { productOrder ->
-                    productOrderRepository.delete(productOrder)
+                               @PathVariable(value = "product_id") productId: Long): ResponseEntity<Void> =
+            productOrderRepository.findById(ProductOrderKey(productId, orderId)).map { productOrder ->
+                productOrderRepository.delete(productOrder)
                 ResponseEntity<Void>(HttpStatus.OK)
             }.orElse(ResponseEntity.notFound().build())
 

@@ -14,19 +14,31 @@ import java.util.*
 class OrderController(val orderRepository: OrderRepository) {
 
     @GetMapping("/opened")
-    fun findOrderOpened(): ResponseEntity<Orders> =
+    fun findOrderOpened(): ResponseEntity<OrderItemResponse> =
             orderRepository.findOpened().map {
-                ResponseEntity(it, HttpStatus.OK)
+                ResponseEntity(OrderItemResponse(it), HttpStatus.OK)
+            }.orElse(ResponseEntity.notFound().build())
+
+    @GetMapping("/{id}")
+    fun getOrderById(@PathVariable(value = "id") orderId: Long): ResponseEntity<OrderItemResponse> =
+            orderRepository.findById(orderId).map { order ->
+                ResponseEntity(OrderItemResponse(order), HttpStatus.OK)
             }.orElse(ResponseEntity.notFound().build())
 
     @GetMapping
     fun getAllOrders(): List<OrderItemResponse> = orderRepository.findAll().map(::OrderItemResponse)
 
     @PostMapping
-    fun createOrder() {
-        orderRepository.save(Orders(
-                dateCreated = getNowDateFormat()
-        ))
+    fun createOrder(): ResponseEntity<Void> {
+
+        if (orderRepository.findOpened().isPresent) {
+            return ResponseEntity.badRequest().build()
+        } else {
+            orderRepository.save(Orders(
+                    dateCreated = getNowDateFormat()
+            ))
+            return ResponseEntity(HttpStatus.OK)
+        }
     }
 
     @PutMapping("/{id}")
@@ -39,8 +51,8 @@ class OrderController(val orderRepository: OrderRepository) {
 
     @DeleteMapping("/{id}")
     fun deleteOrderById(@PathVariable(value = "id") orderId: Long): ResponseEntity<Void> =
-            orderRepository.findById(orderId).map { product ->
-                orderRepository.delete(product)
+            orderRepository.findById(orderId).map { order ->
+                orderRepository.delete(order)
                 ResponseEntity<Void>(HttpStatus.OK)
             }.orElse(ResponseEntity.notFound().build())
 
