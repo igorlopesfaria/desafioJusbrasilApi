@@ -67,6 +67,4 @@ class ProductOrderController(val productOrderRepository: ProductOrderRepository,
                 productOrderRepository.delete(productOrder)
                 ResponseEntity<Void>(HttpStatus.OK)
             }.orElse(ResponseEntity.notFound().build())
-
-
 }
