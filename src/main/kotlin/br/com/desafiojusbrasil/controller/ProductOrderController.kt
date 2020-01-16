@@ -4,6 +4,7 @@ import br.com.desafiojusbrasil.dao.ProductOrder
 import br.com.desafiojusbrasil.dao.ProductOrderKey
 import br.com.desafiojusbrasil.model.request.ProductOrderRequest
 import br.com.desafiojusbrasil.model.response.ProductOrderItemResponse
+import br.com.desafiojusbrasil.model.response.ProductOrderResponse
 import br.com.desafiojusbrasil.repository.OrderRepository
 import br.com.desafiojusbrasil.repository.ProductOrderRepository
 import br.com.desafiojusbrasil.repository.ProductRepository
@@ -19,12 +20,19 @@ class ProductOrderController(val productOrderRepository: ProductOrderRepository,
                              val orderRepository: OrderRepository) {
 
     @GetMapping("/order/{order_id}")
-    fun getProductOrderByOrderId(@PathVariable(value = "order_id") orderId: Long): List<ProductOrderItemResponse> {
-        return productOrderRepository.findByOrderId(orderId).map(::ProductOrderItemResponse)
+    fun getProductOrderByOrderId(@PathVariable(value = "order_id") orderId: Long): ProductOrderResponse {
+        val listProductOrder = productOrderRepository.findByOrderId(orderId)
+        var total = 0.0
+        listProductOrder.map{
+            total += (it.product.price * it.quantity)
+        }
+        return ProductOrderResponse(total, listProductOrder.map(::ProductOrderItemResponse))
     }
 
     @GetMapping
-    fun getAllProductOrder(): List<ProductOrderItemResponse> = productOrderRepository.findAll().map(::ProductOrderItemResponse)
+    fun getAllProductOrder(): List<ProductOrderItemResponse> {
+        return productOrderRepository.findAll().map(::ProductOrderItemResponse)
+    }
 
     @PostMapping
     fun createProductOrder(@Valid @RequestBody productOrderRequest: ProductOrderRequest): ResponseEntity<Void> {

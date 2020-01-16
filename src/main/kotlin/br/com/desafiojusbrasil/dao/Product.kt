@@ -7,7 +7,7 @@ import javax.persistence.*
 class Product(
         @Id @GeneratedValue val id: Long?= null,
         val name: String,
-        val price: String,
+        val price: Double,
         val description: String,
         @OneToMany(mappedBy = "product")
         val productOrders: List<ProductOrder>?= null
