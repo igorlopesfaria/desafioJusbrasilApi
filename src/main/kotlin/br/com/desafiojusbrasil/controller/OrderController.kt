@@ -20,7 +20,7 @@ class OrderController(val orderRepository: OrderRepository) {
             }.orElse(ResponseEntity.notFound().build())
 
     @GetMapping
-    fun getAllProducts(): List<OrderItemResponse> = orderRepository.findAll().map(::OrderItemResponse)
+    fun getAllOrders(): List<OrderItemResponse> = orderRepository.findAll().map(::OrderItemResponse)
 
     @PostMapping
     fun createOrder() {
@@ -30,7 +30,7 @@ class OrderController(val orderRepository: OrderRepository) {
     }
 
     @PutMapping("/{id}")
-    fun createProduct(@PathVariable(value = "id") orderId: Long): ResponseEntity<Void> =
+    fun updateOrder(@PathVariable(value = "id") orderId: Long): ResponseEntity<Void> =
             orderRepository.findById(orderId).map { orders ->
                 orders.dateOrdered = getNowDateFormat()
                 orderRepository.save(orders)
@@ -38,7 +38,7 @@ class OrderController(val orderRepository: OrderRepository) {
             }.orElse(ResponseEntity.notFound().build())
 
     @DeleteMapping("/{id}")
-    fun deleteProductById(@PathVariable(value = "id") orderId: Long): ResponseEntity<Void> =
+    fun deleteOrderById(@PathVariable(value = "id") orderId: Long): ResponseEntity<Void> =
             orderRepository.findById(orderId).map { product ->
                 orderRepository.delete(product)
                 ResponseEntity<Void>(HttpStatus.OK)

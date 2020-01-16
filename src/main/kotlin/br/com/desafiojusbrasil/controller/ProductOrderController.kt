@@ -56,7 +56,7 @@ class ProductOrderController(val productOrderRepository: ProductOrderRepository,
     }
 
     @DeleteMapping("/order/{order_id}/product/{product_id}")
-    fun deleteProductById(@PathVariable(value = "order_id") orderId: Long,
+    fun deleteProductOrderById(@PathVariable(value = "order_id") orderId: Long,
                           @PathVariable(value = "product_id") productId: Long): ResponseEntity<Void>  =
                 productOrderRepository.findById(ProductOrderKey(productId, orderId)).map { productOrder ->
                     productOrderRepository.delete(productOrder)
