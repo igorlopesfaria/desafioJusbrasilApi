@@ -9,6 +9,7 @@ class Product(
         val name: String,
         val price: Double,
         val description: String,
+        val imagePath: String,
         @OneToMany(mappedBy = "product")
         val productOrders: List<ProductOrder>?= null
 )

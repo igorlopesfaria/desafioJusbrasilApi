@@ -29,7 +29,6 @@ class ProductController {
         val result = testRestTemplate.getForEntity("/products/1", Any::class.java)
         assertNotNull(result)
         assert(result.statusCode == HttpStatus.OK)
-
     }
 
     @Test
