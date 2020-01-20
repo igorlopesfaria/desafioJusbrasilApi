@@ -4,10 +4,12 @@ import br.com.desafiojusbrasil.dao.Product
 
 class ProductRequest(val name: String,
                      val price: Double,
-                     val description: String) {
+                     val description: String,
+                     val imagePath: String) {
     fun toProduct(): Product = Product(
             name = name,
             price = price,
-            description = description
+            description = description,
+            imagePath = imagePath
     )
 }
