@@ -17,7 +17,9 @@ class OrderController(val orderRepository: OrderRepository) {
     fun findOrderOpened(): ResponseEntity<OrderItemResponse> =
             orderRepository.findOpened().map {
                 ResponseEntity(OrderItemResponse(it), HttpStatus.OK)
-            }.orElse(ResponseEntity.notFound().build())
+            }.orElse(
+                    ResponseEntity( HttpStatus.OK)
+            )
 
     @GetMapping("/{id}")
     fun getOrderById(@PathVariable(value = "id") orderId: Long): ResponseEntity<OrderItemResponse> =
