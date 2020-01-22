@@ -17,9 +17,7 @@ class OrderController(val orderRepository: OrderRepository) {
     fun findOrderOpened(): ResponseEntity<OrderItemResponse> =
             orderRepository.findOpened().map {
                 ResponseEntity(OrderItemResponse(it), HttpStatus.OK)
-            }.orElse(
-                    ResponseEntity( HttpStatus.OK)
-            )
+            }.orElse(ResponseEntity.notFound().build())
 
     @GetMapping("/{id}")
     fun getOrderById(@PathVariable(value = "id") orderId: Long): ResponseEntity<OrderItemResponse> =
@@ -31,15 +29,15 @@ class OrderController(val orderRepository: OrderRepository) {
     fun getAllOrders(): List<OrderItemResponse> = orderRepository.findAll().map(::OrderItemResponse)
 
     @PostMapping
-    fun createOrder(): ResponseEntity<Void> {
+    fun createOrder(): ResponseEntity<OrderItemResponse> {
 
         if (orderRepository.findOpened().isPresent) {
             return ResponseEntity.badRequest().build()
         } else {
-            orderRepository.save(Orders(
+            val orderSaved = orderRepository.save(Orders(
                     dateCreated = getNowDateFormat()
             ))
-            return ResponseEntity(HttpStatus.OK)
+            return ResponseEntity(OrderItemResponse(orderSaved), HttpStatus.OK)
         }
     }
 
