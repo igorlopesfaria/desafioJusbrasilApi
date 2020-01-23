@@ -1,0 +1,17 @@
+schema {
+    query: OrdersQuery
+}
+
+# Root
+type OrdersQuery {
+    findAllOrders: [Orders]!
+    findClosedOrders: [Orders]!
+#    findClosedOrders: [Orders]!
+}
+
+type Orders {
+    id: ID!
+    dateCreated: String!
+    dateOrdered: String
+}
+

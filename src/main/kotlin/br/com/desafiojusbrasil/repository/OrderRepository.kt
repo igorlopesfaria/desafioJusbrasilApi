@@ -9,4 +9,6 @@ import java.util.*
 interface OrderRepository: JpaRepository<Orders, Long>{
     fun findOpened(): Optional<Orders>
 
+    fun findClosed(): List<Orders>
+
 }

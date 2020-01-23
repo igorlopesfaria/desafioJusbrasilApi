@@ -23,11 +23,14 @@ class ProductRepositoryTest {
         const val PRODUCT_NAME_VALUE = "Product Name"
         const val PRODUCT_DESCRIPTION_VALUE = "Product Description"
         const val PRODUCT_PRICE_VALUE = 0.0
+        const val PRODUCT_IMAGE_PATH_VALUE = "http://image.path"
+
     }
 
     val templateProduct = Product(name = PRODUCT_NAME_VALUE,
             price = PRODUCT_PRICE_VALUE,
-            description = PRODUCT_DESCRIPTION_VALUE)
+            description = PRODUCT_DESCRIPTION_VALUE,
+            imagePath = PRODUCT_IMAGE_PATH_VALUE)
 
     @Autowired
     lateinit var productRepository: ProductRepository
@@ -40,6 +43,7 @@ class ProductRepositoryTest {
         assertThat(product.name).isEqualTo(PRODUCT_NAME_VALUE);
         assertThat(product.price).isEqualTo(PRODUCT_PRICE_VALUE);
         assertThat(product.description).isEqualTo(PRODUCT_DESCRIPTION_VALUE);
+        assertThat(product.imagePath).isEqualTo(PRODUCT_IMAGE_PATH_VALUE);
         assertNotNull(product.id)
     }
 
@@ -60,6 +64,7 @@ class ProductRepositoryTest {
         assertThat(productOptional.get().name).isEqualTo(PRODUCT_NAME_VALUE);
         assertThat(productOptional.get().price).isEqualTo(PRODUCT_PRICE_VALUE);
         assertThat(productOptional.get().description).isEqualTo(PRODUCT_DESCRIPTION_VALUE);
+        assertThat(productOptional.get().imagePath).isEqualTo(PRODUCT_IMAGE_PATH_VALUE);
         assertNotNull(productOptional.get().id)
     }
 

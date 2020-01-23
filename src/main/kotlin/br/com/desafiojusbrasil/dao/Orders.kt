@@ -3,7 +3,10 @@ package br.com.desafiojusbrasil.dao
 import javax.persistence.*
 
 @Entity
-@NamedQuery(name = "Orders.findOpened", query = "SELECT o FROM Orders o WHERE dateOrdered IS NULL")
+@NamedQueries(
+        NamedQuery(name = "Orders.findOpened", query = "SELECT o FROM Orders o WHERE dateOrdered IS NULL"),
+        NamedQuery(name = "Orders.findClosed", query = "SELECT o FROM Orders o WHERE dateOrdered IS NOT NULL")
+)
 @Table(name = "Orders")
 class Orders(
         @Id @GeneratedValue var id: Long?= null,
