@@ -12,6 +12,5 @@ type OrdersQuery {
 type Orders {
     id: ID!
     dateCreated: String!
-    dateOrdered: String
 }
 
